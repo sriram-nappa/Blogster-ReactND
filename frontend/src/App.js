@@ -14,6 +14,7 @@ class App extends Component {
   render() {
     const { allCategories } = this.props;
     console.log(allCategories)
+
     return (
       <div className="App">
         <Link className="appLink" to="/">

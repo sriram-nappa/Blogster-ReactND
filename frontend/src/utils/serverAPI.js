@@ -8,3 +8,6 @@ export const getCategories = () => {
     return fetch(`${MAIN_URI}/categories`, {headers}).then(res => res.json());
 }
 
+export const getPosts = (id = '') => {
+    return fetch(`${MAIN_URI}/posts/${id}`, {headers}).then(res => res.json());
+}
