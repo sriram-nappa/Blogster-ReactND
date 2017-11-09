@@ -1,7 +1,16 @@
 {
-  "name": "frontend",
+  "name": "Readable",
+  "author": "Sriram Poondi Chinappa",
+  "description": "A Reddit Clone project for react nanodegree",
   "version": "0.1.0",
   "private": true,
+  "main": "index.js",
+  "keywords": [
+    "udacity",
+    "redux",
+    "readable",
+    "react"
+  ],
   "dependencies": {
     "react": "^16.0.0",
     "react-dom": "^16.0.0",
@@ -14,10 +23,19 @@
     "redux": "^3.7.2",
     "redux-thunk": "^2.2.0"
   },
+  "license": "ISC",
+  "devDependencies": {
+    "body-parser": "^1.17.1",
+    "cors": "^2.8.3",
+    "dotenv": "^4.0.0",
+    "express": "^4.15.2",
+    "clone": "^2.1.1"
+  },
   "scripts": {
-    "start": "react-scripts start",
+    "start": "react-scripts start | npm run server",
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "server": "node ./server/server"
   }
 }
