@@ -1,0 +1,15 @@
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { withRouter } from 'react-router-dom';
+import { Link } from 'react-router-dom';
+import Modal from 'react-modal';
+
+class CategoryList extends Component {
+    render() {
+        <div className="categoryList">
+            Hello Here !!!!!!!!!
+        </div>
+    }
+}
+//TODO: Should be refactored.
+export default withRouter(connect)());

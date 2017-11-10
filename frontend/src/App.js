@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import {Link, withRouter, Switch, Route} from 'react-router-dom';
 import { connect } from 'react-redux';
 
+import CategoryList from './components/CategoryList';
 import { getAllCategories } from './actions/categoryActions'
 
 import HomeIcon from 'react-icons/lib/fa/home';
@@ -20,6 +21,9 @@ class App extends Component {
         <Link className="appLink" to="/">
           <HomeIcon size={40}/>
         </Link>
+        <Switch>
+          <Route exact path="/" render={() => <CategoryList categories={allCategories}/>}/>
+        </Switch>
       </div>
     );
   }
