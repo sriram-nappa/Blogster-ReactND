@@ -16,3 +16,14 @@ export const getPostsByCategory = (category) => {
     return fetch(`${MAIN_URI}/${category}/posts`, {headers}).then(res => res.json());
 }
 
+export const addPost = ({id, title, timestamp, body, author, category}) => {
+    return fetch(`${MAIN_URI}/posts`, {headers, method: 'POST', body: JSON.stringify({
+        id,
+        title,
+        timestamp,
+        body,
+        author,
+        category
+    })})
+        .then(res => res.json())
+}
