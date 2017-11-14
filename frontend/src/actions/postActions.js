@@ -19,3 +19,11 @@ export function getAllPostsSuccess(posts) {
         posts
     }
 }
+
+export function deletePost(postId) {
+    return (dispatch) => {
+        serverAPI.deletePost(postId).then(() => {
+            serverAPI.getPosts().then(posts => dispatch(deletePostSuccess(posts)));
+        })
+    }
+}
