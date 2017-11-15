@@ -14,4 +14,4 @@ class CategoryList extends Component {
     }
 }
 //TODO: Should be refactored.
-export default withRouter(connect)();
+export default CategoryList;
