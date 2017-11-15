@@ -1,6 +1,7 @@
 import * as serverAPI from './../utils/serverAPI';
 
 export const GET_POSTS = 'GET_POSTS';
+export const DELETE_POST = 'DELETE_POST'
 
 export function getAllPosts() {
     return (dispatch) => {
@@ -25,5 +26,12 @@ export function deletePost(postId) {
         serverAPI.deletePost(postId).then(() => {
             serverAPI.getPosts().then(posts => dispatch(deletePostSuccess(posts)));
         })
+    }
+}
+
+export function deletePostSuccess(posts) {
+    return {
+        type: DELETE_POST,
+        posts: posts.filter(post => post.deleted === false)
     }
 }

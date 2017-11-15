@@ -6,10 +6,12 @@ import Modal from 'react-modal';
 
 class CategoryList extends Component {
     render() {
-        <div className="categoryList">
-            Hello Here !!!!!!!!!
-        </div>
+        return(
+            <div className="categoryList">
+                Hello Here !!!!!!!!!
+            </div>
+        );    
     }
 }
 //TODO: Should be refactored.
-export default withRouter(connect)());
+export default withRouter(connect)();

@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import {Link, withRouter, Switch, Route} from 'react-router-dom';
 import { connect } from 'react-redux';
 
-import CategoryList from './components/CategoryList';
+import CategoryList from './components/categoryList';
 import { getAllCategories } from './actions/categoryActions'
 
 import HomeIcon from 'react-icons/lib/fa/home';

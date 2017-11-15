@@ -30,15 +30,16 @@ export const addPost = ({id, title, timestamp, body, author, category}) => {
         .then(res => res.json())
 }
 
-export const editPost = (id  = '', postDetails) => {
+export const editPost = (id  = '', {title, body}) => {
     return fetch(`${MAIN_URI}/posts/${id}`, {headers, method: 'PUT', body: JSON.stringify({
-        postDetails.title,
-        postDetails.body,
-    })})
+        title,
+        body,
+        })
+    })
         .then(res => {return;})
 }
 
 export const deletePost = (id = '') => {
-    return fetch(`${MAIN_URI}/${posts}/${id}`, {headers, method: 'DELETE'}).then(res => {return;});
+    return fetch(`${MAIN_URI}/posts/${id}`, {headers, method: 'DELETE'}).then(res => {return;});
 }
 
