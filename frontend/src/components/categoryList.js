@@ -8,7 +8,7 @@ class CategoryList extends Component {
     render() {
         return(
             <div className="categoryList">
-                Hello Here !!!!!!!!!
+                Category List
             </div>
         );    
     }

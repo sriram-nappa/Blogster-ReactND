@@ -5,7 +5,9 @@ import { connect } from 'react-redux';
 import CategoryList from './components/categoryList';
 import { getAllCategories } from './actions/categoryActions'
 
-import HomeIcon from 'react-icons/lib/fa/home';
+import IconButton from 'material-ui/IconButton';
+import ActionHome from 'material-ui/svg-icons/action/home';
+import AppBar from 'material-ui/AppBar';
 import './App.css';
 class App extends Component {
   componentDidMount() {
@@ -18,9 +20,7 @@ class App extends Component {
 
     return (
       <div className="App">
-        <Link className="appLink" to="/">
-          <HomeIcon size={40}/>
-        </Link>
+        <AppBar title="Blogster" iconElementLeft={<IconButton tooltip="Home"><Link className="appLink" to="/"><ActionHome style={{'marginRight': '24'}}/></Link></IconButton>} style={{'textAlign': 'center'}}/>
         <Switch>
           <Route exact path="/" render={() => <CategoryList categories={allCategories}/>}/>
         </Switch>

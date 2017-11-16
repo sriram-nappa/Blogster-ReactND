@@ -7,6 +7,8 @@ import registerServiceWorker from './registerServiceWorker';
 import { createStore, applyMiddleware, compose } from 'redux';
 import { Provider } from 'react-redux';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
+import {blue500} from 'material-ui/styles/colors';
+import getMuiTheme from 'material-ui/styles/getMuiTheme';
 import thunk from 'redux-thunk';
 import rootReducer from './reducers';
 
@@ -22,10 +24,18 @@ const store = createStore(
     rootReducer,
     middleware
 );
+const muiTheme = getMuiTheme({
+    palette: {
+        textColor: '#FFFFFF'
+    },
+    appBar: {
+        height: 50
+    }
+})
 
 ReactDOM.render(
     <Provider store={store}>
-        <MuiThemeProvider>
+        <MuiThemeProvider muiTheme={muiTheme}>       
             <BrowserRouter>
                 <App />
             </BrowserRouter>
