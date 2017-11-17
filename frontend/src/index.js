@@ -25,9 +25,6 @@ const store = createStore(
     middleware
 );
 const muiTheme = getMuiTheme({
-    palette: {
-        textColor: '#FFFFFF'
-    },
     appBar: {
         height: 50
     }

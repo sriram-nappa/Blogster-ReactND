@@ -10,15 +10,13 @@ import './categoryList.css'
 class CategoryList extends Component {
     render() {
         const {categories} = this.props
-        const categoriesWrapper = categories.map((category, i) => {
-            <div key={i}>
-                {category.name}
-            </div>
-        });
+        const categoriesWrapper = categories.map((category, i) => (
+            <ListItem
+                primaryText={category.name} />
+        ));
         return(
             <div className="categoryList">
                 Category List
-                <Subheader inset={true}>Folders</Subheader>
                 <List>
                     {categoriesWrapper}
                 </List>
