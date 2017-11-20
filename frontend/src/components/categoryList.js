@@ -30,11 +30,14 @@ class CategoryList extends Component {
     render() {
         const {categories} = this.props
         const categoriesWrapper = categories.map((category, i) => (
-            <GridTile
-                title={category.name}
-                titleStyle={styles.titleStyle}
-                // titleBackground="linear-gradient(to top, rgba(0,0,0,0.7) 0%,rgba(0,0,0,0.3) 70%,rgba(0,0,0,0) 100%)"
-            >
+            <Link className='categoryList'
+                to="/categories/" + {category.name}>
+                <GridTile
+                    title={category.name}
+                    titleStyle={styles.titleStyle}
+                    // titleBackground="linear-gradient(to top, rgba(0,0,0,0.7) 0%,rgba(0,0,0,0.3) 70%,rgba(0,0,0,0) 100%)"
+                >
+            </Link>
             {/* <img src={tile.img} /> */}
           </GridTile>
         ));
