@@ -46,12 +46,12 @@ export const deletePost = (id = '') => {
 // API calls for comments
 
 export const getCommentsByPost = (id='') => {
-    return fetch(`${BASE_URI}/posts/${id}/comments`, {headers})
+    return fetch(`${MAIN_URI}/posts/${id}/comments`, {headers})
             .then(res => res.json());
 }
 
 export const addCommentByPost = ({id, timestamp, body, author, parentId}) => {
-    return fetch(`${BASE_URI}/comments`, {headers, method: 'POST', body: JSON.stringify({
+    return fetch(`${MAIN_URI}/comments`, {headers, method: 'POST', body: JSON.stringify({
         id,
         timestamp,
         body,
@@ -62,12 +62,12 @@ export const addCommentByPost = ({id, timestamp, body, author, parentId}) => {
 }
 
 export const getCommentById = (id = '') => {
-    return fetch(`${BASE_URI}/comments/${id}`, {headers})
+    return fetch(`${MAIN_URI}/comments/${id}`, {headers})
     .then(res => res.json());
 }
 
 export const voteComment = (id = '', typeVote) => {
-        return fetch(`${BASE_URI}/comments/${id}`, {headers, method: 'POST', body: JSON.stringify({
+        return fetch(`${MAIN_URI}/comments/${id}`, {headers, method: 'POST', body: JSON.stringify({
             option: typeVote
         })
     })
@@ -75,7 +75,7 @@ export const voteComment = (id = '', typeVote) => {
 }
 
 export const editComment = ({ timestamp, id, body }) => {
-        return fetch(`${BASE_URI}/comments/${id}`, {headers, method: 'PUT', body: JSON.stringify({
+        return fetch(`${MAIN_URI}/comments/${id}`, {headers, method: 'PUT', body: JSON.stringify({
             body,
             timestamp
         })
@@ -84,6 +84,6 @@ export const editComment = ({ timestamp, id, body }) => {
 }
 
 export const deleteComment = (id = '') => {
-    return fetch(`${BASE_URI}/comments/${id}`, {headers, method: 'DELETE'})
+    return fetch(`${MAIN_URI}/comments/${id}`, {headers, method: 'DELETE'})
     .then(() => {return;});
 }
