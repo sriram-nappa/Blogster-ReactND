@@ -2,12 +2,20 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import { Link } from 'react-router-dom';
-import {GridTile} from 'material-ui/GridList'
+import Paper from 'material-ui/Paper';
+import './category.css'
 
-const styles = {
-    titleStyle: {
-        color: '#000000',
-    },
+const style = {
+    height: 250,
+    width: 250,
+    margin: 40,
+    padding: 100,
+    textAlign: 'center',
+    display: 'inline-block',
+};
+
+const tileImages = {
+
 }
 
 class Category extends Component {
@@ -16,12 +24,9 @@ class Category extends Component {
         return (
             <div className="category">
                 <Link to={`/categories/${categoryPath}`}>
-                    <GridTile
-                        title={categoryPath}
-                        titleStyle={styles.titleStyle}
-                        titleBackground="linear-gradient(to top, rgba(0,0,0,0.7) 0%,rgba(0,0,0,0.3) 70%,rgba(0,0,0,0) 100%)"
-                    >
-                    </GridTile>
+                    <Paper style={style} zDepth={2} circle={true}>
+                        {categoryPath}
+                    </Paper>
                 </Link>
             </div>
         )

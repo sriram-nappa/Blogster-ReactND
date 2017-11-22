@@ -1,0 +1,6 @@
+.category {
+    display: inline-block;
+    position: relative;
+    top: 20rem;
+    text-transform: capitalize;
+}
