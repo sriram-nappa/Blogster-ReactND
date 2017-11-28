@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import { Link } from 'react-router-dom';
-import MenuItem from 'material-ui/MenuItem';
+import Paper from 'material-ui/Paper';
 
 import './category.css'
 
@@ -23,11 +23,11 @@ class Category extends Component {
     render() {
         const {categoryPath} = this.props;
         return (
-            <MenuItem>
-                <Link to={`/categories/${categoryPath}`}>
-                    {categoryPath}
-                </Link>
-            </MenuItem>
+                <Paper style={style} zDepth={3} rounded={true}>
+                    <Link to={`/categories/${categoryPath}`} style={{ textDecoration: 'none' }}>
+                        <span className="category">{categoryPath}</span>
+                    </Link>
+                </Paper>
         )
     }
 }

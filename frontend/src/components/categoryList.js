@@ -2,24 +2,16 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import { Link } from 'react-router-dom';
-import Drawer from 'material-ui/Drawer';
 
 import Category from '../components/category'
 import './categoryList.css'
 
-const styles = {
-    root: {
-      display: 'flex',
-      flexWrap: 'wrap',
-      justifyContent: 'space-around',
-    },
-    gridList: {
-        width: 500,
-        height: 450,
-        display: 'flex',
-        flexWrap: 'nowrap',
-        overflowX: 'auto',
-    },
+const style = {
+    height: 100,
+    width: 100,
+    margin: 20,
+    textAlign: 'center',
+    display: 'inline-block',
   };
   
   
@@ -32,9 +24,7 @@ class CategoryList extends Component {
         console.log(categoriesWrapper)
         return(
             <div className="categoryList">
-                <Drawer docked={true} containerStyle={{'marginTop':'50px'}}>
-                    {categoriesWrapper}
-                </Drawer>
+                {categoriesWrapper}
             </div>
         );    
     }

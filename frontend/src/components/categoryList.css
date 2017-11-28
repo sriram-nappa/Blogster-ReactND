@@ -1,3 +1,4 @@
 .categoryList {
     margin-top: 10px;
+    text-transform: capitalize;
 }
