@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import { Link } from 'react-router-dom';
+import Drawer from 'material-ui/Drawer';
+
 import Category from '../components/category'
 import './categoryList.css'
 
@@ -27,9 +29,12 @@ class CategoryList extends Component {
         const categoriesWrapper = categories.map((category, i) => (
                 <Category key={i} categoryPath={category.name}/>
         ));
+        console.log(categoriesWrapper)
         return(
             <div className="categoryList">
-                {categoriesWrapper}
+                <Drawer docked={true} containerStyle={{'marginTop':'50px'}}>
+                    {categoriesWrapper}
+                </Drawer>
             </div>
         );    
     }

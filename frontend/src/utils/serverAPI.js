@@ -39,6 +39,13 @@ export const editPost = (id  = '', {title, body}) => {
         .then(res => {return;})
 }
 
+export const votePost = (id = '', typeVote) => {
+    return fetch(`${MAIN_URI}/posts/${id}`, {headers, method: 'POST', body: JSON.stringify({
+      option: typeVote
+    })})
+    .then(res => res.json());
+  }
+
 export const deletePost = (id = '') => {
     return fetch(`${MAIN_URI}/posts/${id}`, {headers, method: 'DELETE'}).then(res => {return;});
 }
