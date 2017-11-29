@@ -2,14 +2,16 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import { Link } from 'react-router-dom';
+import Paper from 'material-ui/Paper';
 
 import Category from '../components/category'
 import './categoryList.css'
 
 const style = {
-    height: 100,
-    width: 100,
-    margin: 20,
+    height: 250,
+    width: 250,
+    margin: 40,
+    padding: 100,
     textAlign: 'center',
     display: 'inline-block',
   };
@@ -19,7 +21,9 @@ class CategoryList extends Component {
     render() {
         const {categories} = this.props
         const categoriesWrapper = categories.map((category, i) => (
-                <Category key={i} categoryPath={category.name}/>
+            <Paper key={i} style={style} zDepth={3} rounded={true}>            
+                <Category categoryPath={category.name}/>
+            </Paper>
         ));
         console.log(categoriesWrapper)
         return(

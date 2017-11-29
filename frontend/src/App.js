@@ -6,6 +6,7 @@ import CategoryList from './components/categoryList';
 import { getAllCategories } from './actions/categoryActions'
 
 import PostsList from './components/postsList';
+import { getAllPosts } from './actions/postActions';
 
 import IconButton from 'material-ui/IconButton';
 import ActionHome from 'material-ui/svg-icons/action/home';
@@ -15,11 +16,11 @@ import './App.css';
 class App extends Component {
   componentDidMount() {
     this.props.fetchAllCategories();
+    this.props.fetchAllPosts();
   }
 
   render() {
     const { allCategories } = this.props;
-    console.log(allCategories)
 
     return (
       <div className="App">
@@ -34,6 +35,7 @@ class App extends Component {
 }
 
 function mapStateToProps(state) {
+  console.log(state)
   return {
     allCategories: state.categories.categories
   }
@@ -41,7 +43,8 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
   return {
-    fetchAllCategories: () => dispatch(getAllCategories())
+    fetchAllCategories: () => dispatch(getAllCategories()),
+    fetchAllPosts: () => dispatch(getAllPosts())
   }
 }
 
