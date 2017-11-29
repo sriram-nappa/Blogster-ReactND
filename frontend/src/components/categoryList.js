@@ -4,7 +4,6 @@ import { withRouter } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 import Paper from 'material-ui/Paper';
 
-import Category from '../components/category'
 import './categoryList.css'
 
 const style = {
@@ -18,16 +17,25 @@ const style = {
   
   
 class CategoryList extends Component {
+    renderCategories(categoryPath) {
+        return (
+            <div className="category-title">
+                <Link to={`/categories/${categoryPath}`} style={{ textDecoration: 'none' }}>
+                    <span className="category-title-head">{categoryPath}</span>
+                </Link>
+            </div>
+        )    
+    }
+
     render() {
         const {categories} = this.props
         const categoriesWrapper = categories.map((category, i) => (
             <Paper key={i} style={style} zDepth={3} rounded={true}>            
-                <Category categoryPath={category.name}/>
+                {this.renderCategories(category.path)}
             </Paper>
         ));
-        console.log(categoriesWrapper)
         return(
-            <div className="categoryList">
+            <div className="category-list">
                 {categoriesWrapper}
             </div>
         );    

@@ -1,4 +1,9 @@
-.categoryList {
+.category-list {
     margin-top: 10px;
     text-transform: capitalize;
+}
+
+.category-title-head {
+    color: #000000;
+    font-size: 1.4em;
 }

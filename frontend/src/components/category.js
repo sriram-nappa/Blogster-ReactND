@@ -3,9 +3,13 @@ import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 
+import { getAllCategories } from '../actions/categoryActions';
+import { getAllPosts } from '../actions/postActions';
+
 import './category.css'
 
 class Category extends Component {
+
     render() {
         const {categoryPath} = this.props;
         return (
@@ -20,4 +24,22 @@ class Category extends Component {
     }
 }
 
-export default Category;
+function mapStateToProps(state, props) {
+    const categoryID = props.categoryid ? props.categoryid : props.match.params.categoryid;
+    const postsList = state.posts.posts ? state.posts.posts.filter(post => categoryID === post.category) : [];
+    const category = state.categories.categories.find(category => categoryID === category.path) || [];
+    console.log("State", category, postsList)
+    return {
+        category: category,
+        posts: postsList
+    }
+}
+
+function mapDispatchToProps(dispatch) {
+    return {
+      fetchAllCategories: () => dispatch(getAllCategories()),
+      fetchAllPosts: () => dispatch(getAllPosts())
+    };
+}
+  
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Category));
