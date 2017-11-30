@@ -2,23 +2,74 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import { Link } from 'react-router-dom';
+import FlatButton from 'material-ui/FlatButton';
+import Dialog from 'material-ui/Dialog';
 
 import { getAllCategories } from '../actions/categoryActions';
 import { getAllPosts } from '../actions/postActions';
 
 import './category.css'
 
+const style = {
+    dividerStyle : {
+        float: 'left',
+        marginTop: '25px'
+    },
+    addPostBtnStyle : {
+        margin: 12,
+        color: '#ffffff'        
+    }
+}
 class Category extends Component {
+    state = {
+        modalOpen : false
+    }
+
+    openModal() {
+        console.log('Here')
+        this.setState({modalOpen: true})
+    }
+
+    closeModal() {
+        this.setState({modalOpen: false})
+    }
 
     render() {
-        const {categoryPath} = this.props;
+        const {category} = this.props;
+        const modalActions = [
+            <FlatButton
+              label="Cancel"
+              primary={true}
+              onClick={this.closeModal.bind(this)}
+            />,
+            <FlatButton
+              label="Submit"
+              primary={true}
+              onClick={this.closeModal.bind(this)}
+            />,
+        ];
+        console.log(this.state.modalOpen)
         return (
             <div className="category">
-                <div className="category-title">
-                    <Link to={`/categories/${categoryPath}`} style={{ textDecoration: 'none' }}>
-                        <span className="category-title-head">{categoryPath}</span>
-                    </Link>
-                </div>    
+                <div className="category-content">
+                    <span className="category-content-header">
+                        {category.name}
+                    </span>
+                    <div className="category-divider">.</div>
+                    <FlatButton backgroundColor="#0a4797"
+                        hoverColor="#0d3a75"
+                        label="Add Post"
+                        style={style.addPostBtnStyle}
+                        onClick={this.openModal.bind(this)}/>
+                    <Dialog
+                        title="Add Post"
+                        actions={modalActions}
+                        modal={true}
+                        open={this.state.modalOpen}
+                    >
+                        Only actions can close this dialog.
+                    </Dialog>
+                </div>
             </div>
         )
     }
