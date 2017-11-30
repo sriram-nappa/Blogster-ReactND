@@ -4,6 +4,7 @@ import { withRouter } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 import FlatButton from 'material-ui/FlatButton';
 import Dialog from 'material-ui/Dialog';
+import TextField from 'material-ui/TextField';
 
 import { getAllCategories } from '../actions/categoryActions';
 import { getAllPosts } from '../actions/postActions';
@@ -67,7 +68,10 @@ class Category extends Component {
                         modal={true}
                         open={this.state.modalOpen}
                     >
-                        Only actions can close this dialog.
+                        <TextField name="name" hintText="Name" />
+                        <TextField name="title" hintText="Title" />
+                        <TextField name="category" hintText="Category" />
+                        <TextField name="description" hintText="Description" />
                     </Dialog>
                 </div>
             </div>
