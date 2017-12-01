@@ -6,8 +6,10 @@ import FlatButton from 'material-ui/FlatButton';
 import Dialog from 'material-ui/Dialog';
 import TextField from 'material-ui/TextField';
 
+import AddPostForm from './addPostForm';
+
 import { getAllCategories } from '../actions/categoryActions';
-import { getAllPosts } from '../actions/postActions';
+import { getAllPosts, addPost } from '../actions/postActions';
 
 import './category.css'
 
@@ -68,10 +70,7 @@ class Category extends Component {
                         modal={true}
                         open={this.state.modalOpen}
                     >
-                        <TextField name="name" hintText="Name" />
-                        <TextField name="title" hintText="Title" />
-                        <TextField name="category" hintText="Category" />
-                        <TextField name="description" hintText="Description" />
+                        <AddPostForm isEdit={false}/> 
                     </Dialog>
                 </div>
             </div>
