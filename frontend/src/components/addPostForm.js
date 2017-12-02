@@ -1,6 +1,9 @@
 import React, {Component} from 'react';
 import { connect } from 'react-redux';
 import TextField from 'material-ui/TextField';
+import FlatButton from 'material-ui/FlatButton';
+import uuid from 'react-native-uuid';
+
 import {Link, withRouter, Switch, Route} from 'react-router-dom';
 
 import {
@@ -19,11 +22,45 @@ class AddPostForm extends Component {
     }
 
     componentDidMount() {
-        const {body, author, title} = this.props.post;
+        console.log(this.props)
+        const {body, author, title} = this.props.post ? this.props.post : '';
         this.setState({body, author, title})
     }
 
+    submitForm = (ev) => {
+        ev.preventDefault()
+        const {id, timestamp, category} = this.props.post
+        const post = Object.assign({}, this.state, {
+            category,
+            id: id || uuid.v4(),
+            timestamp: timestamp || Date.now()
+        });
+        debugger
+        if (!this.props.isEdit) {
+            this.props.addPost(post)
+        } else {
+            this.props.updatePost(post)
+        }
+        this.props.closeModal()
+    }
+
+    handleAuthorUpdate = (ev) => {
+        ev.preventDefault()
+        this.setState({author: ev.target.value})
+    }
+
+    handleTitleUpdate = (ev) => {
+        ev.preventDefault()
+        this.setState({title: ev.target.value})
+    }
+
+    handleDescriptionUpdate = (ev) => {
+        ev.preventDefault()
+        this.setState({body: ev.target.value})
+    }
+
     render() {
+        const {closeModal} = this.props;        
         return (
             <div>
                 <form>
@@ -31,17 +68,27 @@ class AddPostForm extends Component {
                         this.props.isEdit ? null
                         : <div>
                             <label>Author : </label>
-                            <TextField name="author" hintText="Name" />
+                            <TextField name="author" onChange={this.handleAuthorUpdate} hintText="Name" />
                         </div>
                     }
                     <div>
                         <label>Title : </label>
-                        <TextField name="title" hintText="Title" />
+                        <TextField name="title" onChange={this.handleTitleUpdate} hintText="Title" />
                     </div>
                     <div>
                         <label>Description : </label>
-                        <TextField name="description" hintText="Description" />
+                        <TextField name="body" onChange={this.handleDescriptionUpdate} hintText="Description" />
                     </div>
+                    <FlatButton
+                        label="Submit"
+                        primary={true}
+                        onClick={this.submitForm}
+                    />
+                    <FlatButton
+                        label="Cancel"
+                        primary={true}
+                        onClick={closeModal}
+                    />
                 </form>
             </div>
         )

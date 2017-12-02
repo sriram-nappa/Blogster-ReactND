@@ -5,6 +5,7 @@ import { Link } from 'react-router-dom';
 import FlatButton from 'material-ui/FlatButton';
 import Dialog from 'material-ui/Dialog';
 import TextField from 'material-ui/TextField';
+// import uuid from 'react-native-uuid';
 
 import AddPostForm from './addPostForm';
 
@@ -24,8 +25,12 @@ const style = {
     }
 }
 class Category extends Component {
-    state = {
-        modalOpen : false
+    constructor(props) {
+        super(props)
+        this.state = {
+            modalOpen : false
+        }
+        this.closeModal = this.closeModal.bind(this)
     }
 
     openModal() {
@@ -34,11 +39,14 @@ class Category extends Component {
     }
 
     closeModal() {
+        console.log("Called", this.state)
         this.setState({modalOpen: false})
     }
 
     render() {
         const {category} = this.props;
+        const selectedPost = {category: category.path}
+        console.log(category)
         const modalActions = [
             <FlatButton
               label="Cancel"
@@ -66,11 +74,11 @@ class Category extends Component {
                         onClick={this.openModal.bind(this)}/>
                     <Dialog
                         title="Add Post"
-                        actions={modalActions}
+                        // actions={modalActions}
                         modal={true}
                         open={this.state.modalOpen}
                     >
-                        <AddPostForm isEdit={false}/> 
+                        <AddPostForm closeModal={this.closeModal} isEdit={false} post={selectedPost}/> 
                     </Dialog>
                 </div>
             </div>
