@@ -14,13 +14,16 @@ import {
 import { addCommentByPost } from '../utils/serverAPI';
 
 class AddPostForm extends Component {
-
-    state = {
-        body: '',
-        author: '',
-        title: ''
+    constructor(props) {
+        super(props)
+        this.state = {
+            body: '',
+            author: '',
+            title: ''
+        }
+        this.submitForm = this.submitForm.bind(this);
     }
-
+    
     componentDidMount() {
         console.log(this.props)
         const {body, author, title} = this.props.post ? this.props.post : '';
