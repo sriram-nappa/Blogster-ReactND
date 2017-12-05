@@ -1,5 +1,5 @@
 const MAIN_URI = 'http://localhost:3001';
-const AUTH_TOKEN = '1827-asdkjna-32r34-asd3r244'
+const AUTH_TOKEN = '503a657b-2e4c-456b-b745-86341694f8'
 const headers = {
     'Authorization':  AUTH_TOKEN
 }
@@ -19,6 +19,7 @@ export const getPosts = (id = '') => {
 }
 
 export const addPost = ({id, title, timestamp, body, author, category}) => {
+    debugger
     return fetch(`${MAIN_URI}/posts`, {headers, method: 'POST', body: JSON.stringify({
         id,
         title,
@@ -26,8 +27,13 @@ export const addPost = ({id, title, timestamp, body, author, category}) => {
         body,
         author,
         category
-    })})
-        .then(res => res.json())
+        })
+    })
+        .then(res => 
+            {
+                res.json()
+            }
+        )
 }
 
 export const editPost = (id  = '', {title, body}) => {

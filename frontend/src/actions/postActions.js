@@ -61,7 +61,6 @@ export function updatePost(post) {
   }
 
   export function addPost(post) {
-    debugger
     return (dispatch) => {
       serverAPI.addPost(post).then(() => {
         serverAPI.getPosts().then(posts => {

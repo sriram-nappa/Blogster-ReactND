@@ -38,7 +38,6 @@ class AddPostForm extends Component {
             id: id || uuid.v4(),
             timestamp: timestamp || Date.now()
         });
-        debugger
         if (!this.props.isEdit) {
             this.props.addPost(post)
         } else {
@@ -98,7 +97,8 @@ class AddPostForm extends Component {
     }
 }
 
-function mapStateToProps(state, props) {
+function mapStateToProps(state) {
+    console.log(state)
     return {}
 }
 
