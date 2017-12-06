@@ -39,6 +39,7 @@ class AddPostForm extends Component {
             timestamp: timestamp || Date.now()
         });
         if (!this.props.isEdit) {
+            console.log(post)
             this.props.addPost(post)
         } else {
             this.props.updatePost(post)

@@ -65,9 +65,9 @@ function getAll (token) {
 }
 
 function add (token, post) {
+  console.log("Post", post)  
   return new Promise((res) => {
     let posts = getData(token)
-    console.log("Post", post)
     posts[post.id] = {
       id: post.id,
       timestamp: post.timestamp,

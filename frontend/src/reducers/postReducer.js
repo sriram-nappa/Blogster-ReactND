@@ -15,6 +15,10 @@ export default (state= initialState, action) => {
     switch (action.type) {
         case GET_POSTS:
         case ADD_POST:
+            console.log(action, state)
+            return Object.assign({}, state, {
+                posts: action.posts
+            })
         case DELETE_POST:
         case UNLIKE_POST:
         case LIKE_POST:
