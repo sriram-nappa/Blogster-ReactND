@@ -1,6 +1,8 @@
 const MAIN_URI = 'http://localhost:3001';
 const AUTH_TOKEN = '503a657b-2e4c-456b-b745-86341694f8'
 const headers = {
+    'Accept': 'application/json',
+    'Content-Type': 'application/json',
     'Authorization':  AUTH_TOKEN
 }
 
@@ -18,11 +20,11 @@ export const getPosts = (id = '') => {
     return fetch(`${MAIN_URI}/posts/${id}`, {headers}).then(res => res.json());
 }
 
-export const addPost = ({id, title, timestamp, body, author, category}) => {
+export const addPost = ({id, timestamp, title, body, author, category}) => {
     return fetch(`${MAIN_URI}/posts`, {headers, method: 'POST', body: JSON.stringify({
         id,
-        title,
         timestamp,
+        title,
         body,
         author,
         category
