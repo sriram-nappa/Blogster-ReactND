@@ -10,7 +10,18 @@ import {
     addComment,
     updateComment
 } from '../actions/commentActions';
-
+export function updatePost(post) {
+    return (dispatch) => {   
+      api.editPost(post.id, {
+        title: post.title,
+        body: post.body
+      }).then(() => {
+        api.getPosts().then(posts => {
+          dispatch(updatePostSuccess(posts));
+        })
+      });
+    };
+  }
 class AddPostForm extends Component {
     constructor(props) {
         super(props)
