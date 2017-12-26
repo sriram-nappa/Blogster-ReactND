@@ -10,7 +10,7 @@ export const UPDATE_POST = 'UPDATE_POST';
 export function getAllPosts() {
     return (dispatch) => {
         serverAPI.getPosts().then(data => {
-            dispatch(getAllPostsSuccess(data.posts))
+            dispatch(getAllPostsSuccess(data))
         }).catch(error => {
             console.log('error')
             throw(error)
@@ -19,6 +19,7 @@ export function getAllPosts() {
 }
 
 export function getAllPostsSuccess(posts) {
+    console.log('Posts Action', posts)
     return {
         type: GET_POSTS,
         posts
