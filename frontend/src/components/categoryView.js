@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import Paper from 'material-ui/Paper';
 
-import './categoryList.css'
+import './categoryView.css'
 
 const style = {
     height: 250,
@@ -14,7 +14,7 @@ const style = {
   };
   
   
-class CategoryList extends Component {
+class CategoryView extends Component {
     renderCategories(categoryPath) {
         return (
             <div className="category-title">
@@ -40,4 +40,4 @@ class CategoryList extends Component {
     }
 }
 //TODO: Should be refactored.
-export default CategoryList;
+export default CategoryView;

@@ -7,9 +7,9 @@ export const UNLIKE_POST = 'UNLIKE_POST';
 export const ADD_POST = 'ADD_POST';
 export const UPDATE_POST = 'UPDATE_POST';
 
-export function getAllPosts() {
+export function getAllPosts(postId = '') {
     return (dispatch) => {
-        serverAPI.getPosts().then(data => {
+        serverAPI.getPosts(postId).then(data => {
             dispatch(getAllPostsSuccess(data))
         }).catch(error => {
             console.log('error')

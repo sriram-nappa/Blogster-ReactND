@@ -2,12 +2,12 @@ import React, { Component } from 'react';
 import {Link, withRouter, Switch, Route} from 'react-router-dom';
 import { connect } from 'react-redux';
 
-import CategoryList from './components/categoryList';
+import CategoryView from './components/categoryView';
 import { getAllCategories } from './actions/categoryActions'
 
 import Category from './components/category';
 
-import PostsList from './components/postsList';
+import Post from './components/post';
 import { getAllPosts } from './actions/postActions';
 
 import IconButton from 'material-ui/IconButton';
@@ -28,7 +28,7 @@ class App extends Component {
       <div className="App">
         <AppBar title="Blogster" iconElementLeft={<IconButton tooltip="Home"><Link className="appLink" to="/"><ActionHome style={{'marginRight': '24'}}/></Link></IconButton>} style={{'textAlign': 'center'}}/>
         <Switch>
-          <Route exact path="/" render={() => <CategoryList categories={allCategories}/>}/>
+          <Route exact path="/" render={() => <CategoryView categories={allCategories}/>}/>
           <Route exact path="/categories/:categoryid" render={() => <Category/>}/>
         </Switch>
       </div>

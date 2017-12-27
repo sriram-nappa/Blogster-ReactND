@@ -26,13 +26,13 @@ class AddPostForm extends Component {
     
     componentDidMount() {
         console.log(this.props)
-        const {body, author, title} = this.props.post ? this.props.post : '';
+        const {body, author, title} = this.props.selectedPost ? this.props.selectedPost : '';
         this.setState({body, author, title})
     }
 
     submitForm = (ev) => {
         ev.preventDefault()
-        const {id, timestamp, category} = this.props.post
+        const {id, timestamp, category} = this.props.selectedPost
         const post = Object.assign({}, this.state, {
             category,
             id: id || uuid.v4(),
@@ -63,12 +63,17 @@ class AddPostForm extends Component {
     }
 
     render() {
-        const {closeModal} = this.props;        
+        const {closeModal, selectedPost, isEdit} = this.props;   
+        console.log(selectedPost, '=============')
         return (
             <div>
                 <form>
                     {
-                        this.props.isEdit ? null
+                        isEdit ? 
+                        <div>
+                            <label>Author : </label>
+                            <TextField name="author" defaultValue={selectedPost.author} disabled={true}/>
+                        </div>
                         : <div>
                             <label>Author : </label>
                             <TextField name="author" onChange={this.handleAuthorUpdate} hintText="Name" />
@@ -76,11 +81,11 @@ class AddPostForm extends Component {
                     }
                     <div>
                         <label>Title : </label>
-                        <TextField name="title" onChange={this.handleTitleUpdate} hintText="Title" />
+                        <TextField name="title" defaultValue={isEdit ? selectedPost.title : ''} onChange={this.handleTitleUpdate} hintText="Title" />
                     </div>
                     <div>
                         <label>Description : </label>
-                        <TextField name="body" onChange={this.handleDescriptionUpdate} hintText="Description" />
+                        <TextField name="body" defaultValue={isEdit ? selectedPost.body : ''} onChange={this.handleDescriptionUpdate} hintText="Description" />
                     </div>
                     <FlatButton
                         label="Submit"

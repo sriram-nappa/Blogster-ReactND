@@ -1,14 +1,26 @@
-import React, { Component } from 'react'
-import {connect} from 'react-redux'
-import {withRouter, Link} from 'react-router-dom'
-import Modal from 'react-modal'
+import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
+import Paper from 'material-ui/Paper';
 
-class PostsLists extends Component {
+const style = {
+    height: 250,
+    width: 250,
+    margin: 40,
+    padding: 100,
+    textAlign: 'center',
+    display: 'inline-block',
+  };
+  
+  
+class PostsList extends Component {
+
     render() {
-        return (
-            <div>Helllo This is a post</div>
-        )
+        return(
+            <div>
+                "Hello this is posts page"
+            </div>
+        );    
     }
 }
-
-export default PostsLists;
+//TODO: Should be refactored.
+export default PostsList;

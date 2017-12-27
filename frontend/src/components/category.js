@@ -5,8 +5,9 @@ import { Link } from 'react-router-dom';
 import FlatButton from 'material-ui/FlatButton';
 import Dialog from 'material-ui/Dialog';
 import TextField from 'material-ui/TextField';
-import Paper from 'material-ui/Paper';
 // import uuid from 'react-native-uuid';
+
+import Post from './post';
 
 import AddPostForm from './addPostForm';
 
@@ -14,6 +15,7 @@ import { getAllCategories } from '../actions/categoryActions';
 import { getAllPosts, addPost } from '../actions/postActions';
 
 import './category.css'
+import post from './post';
 
 const style = {
     dividerStyle : {
@@ -24,36 +26,18 @@ const style = {
         margin: 12,
         color: '#ffffff'        
     },
-    postsView : {
-        height: 250,
-        width: 400,
-        marginLeft: 20,
-        float: 'left',
-        padding: 20
-    },
-    postTitle : {
-        color: '#000000',
-        fontSize: 18,
-        fontWeight: 'bolder',
-        marginBottom: 15
-    },
-    textBold : {
-        fontWeight: 'bold'
-    },
-    textItalics : {
-        fontStyle: 'italic'
-    },
-    postDesc : {
-        marginTop: 15
-    }
 }
+
 class Category extends Component {
     constructor(props) {
         super(props)
         this.state = {
-            modalOpen : false
+            modalOpen : false,
+            isEdit : false,
+            selectedPost: {}
         }
         this.closeModal = this.closeModal.bind(this)
+        this.editPost = this.editPost.bind(this)
     }
 
     openModal() {
@@ -63,7 +47,17 @@ class Category extends Component {
 
     closeModal() {
         console.log("Called", this.state)
-        this.setState({modalOpen: false})
+        this.setState({modalOpen: false, isEdit: false})
+    }
+
+    editPost(e) {
+        let postId = e.target.parentElement.getAttribute('post-id') || e.target.getAttribute('post-id')
+        const {posts} = this.props
+        let filteredPost = posts.filter((post) => {
+            return post.id === postId
+        })
+        console.log(filteredPost, "++++++++++++")
+        this.setState({isEdit: true, modalOpen:true, selectedPost:{...filteredPost[0]}})
     }
 
     convertToDate(timestamp) {
@@ -72,26 +66,10 @@ class Category extends Component {
         return dateString
     }
 
-    renderPosts() {
-        var that = this
-        const {posts} = this.props
-        console.log(posts)
-        return(
-            posts.map((post, i) => (
-                <Paper key={i} style={style.postsView} zDepth={3} rounded={true}>            
-                    <div style={style.postTitle}>{post.title}</div>
-                    <div>by <span style={style.textBold}>{post.author}</span> posted in <span style={style.textBold}>{post.category}</span></div>
-                    <span style={style.textItalics}>{that.convertToDate(post.timestamp)}</span>
-                    <div style={style.postDesc}>{post.body}</div>
-                </Paper>
-            )
-        ))
-    }
-
     render() {
         const {category} = this.props;
-        const selectedPost = {category: category.path}
-        console.log(this.props)
+        const currentCategory = {category: category.path}
+        console.log(this.state, "Stateee")
         const modalActions = [
             <FlatButton
               label="Cancel"
@@ -104,7 +82,7 @@ class Category extends Component {
               onClick={this.closeModal.bind(this)}
             />,
         ];
-        console.log(this.state.modalOpen)
+        console.log(this.state.modalOpen, 'Edit Post', this.state.isEdit)
         return (
             <div className="category">
                 <div className="category-content">
@@ -118,15 +96,15 @@ class Category extends Component {
                         style={style.addPostBtnStyle}
                         onClick={this.openModal.bind(this)}/>
                     <Dialog
-                        title="Add Post"
+                        title={this.state.isEdit ? "Edit Post" : "Add Post"}
                         // actions={modalActions}
                         modal={true}
                         open={this.state.modalOpen}
                     >
-                        <AddPostForm closeModal={this.closeModal} isEdit={false} post={selectedPost}/> 
+                        <AddPostForm closeModal={this.closeModal} isEdit={this.state.isEdit} selectedPost={this.state.isEdit ? this.state.selectedPost : currentCategory}/> 
                     </Dialog>
                     <div className="category-posts">
-                        {this.renderPosts()}
+                        <Post posts={this.props.posts} editPost={this.editPost}/>
                     </div>
                 </div>
             </div>
