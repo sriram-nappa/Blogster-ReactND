@@ -9,7 +9,7 @@ export const UPDATE_COMMENT = 'UPDATE_COMMENT';
 
 export function addComment(comment) {
   return (dispatch) => {
-    serverAPI.addCommentToPost(comment).then(() => {
+    serverAPI.addCommentByPost(comment).then(() => {
       serverAPI.getCommentsByPost(comment.parentId).then((comments) => {
         dispatch(addCommentSuccess(comments));
       });
@@ -69,7 +69,7 @@ export function getCommentsByPost(postId) {
 export function getCommentsSuccess(comments) {
   return {
     type: GET_COMMENTS_BY_POST_ID,
-    comments: comments
+    comments
   }
 }
 

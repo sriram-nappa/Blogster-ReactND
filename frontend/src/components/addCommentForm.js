@@ -10,19 +10,8 @@ import {
     addComment,
     updateComment
 } from '../actions/commentActions';
-export function updatePost(post) {
-    return (dispatch) => {   
-      api.editPost(post.id, {
-        title: post.title,
-        body: post.body
-      }).then(() => {
-        api.getPosts().then(posts => {
-          dispatch(updatePostSuccess(posts));
-        })
-      });
-    };
-  }
-class AddPostForm extends Component {
+
+class AddCommentForm extends Component {
     constructor(props) {
         super(props)
         this.state = {
@@ -35,13 +24,13 @@ class AddPostForm extends Component {
     
     componentDidMount() {
         console.log(this.props)
-        const {body, author, title} = this.props.post ? this.props.post : '';
-        this.setState({body, author, title})
+        const {body, author} = this.props.selectedPost ? this.props.selectedPost : '';
+        this.setState({body, author})
     }
 
     submitForm = (ev) => {
         ev.preventDefault()
-        const {id, timestamp, category} = this.props.post
+        const {id, timestamp, category} = this.props.selectedPost
         const post = Object.assign({}, this.state, {
             category,
             id: id || uuid.v4(),
@@ -61,35 +50,31 @@ class AddPostForm extends Component {
         this.setState({author: ev.target.value})
     }
 
-    handleTitleUpdate = (ev) => {
-        ev.preventDefault()
-        this.setState({title: ev.target.value})
-    }
-
     handleDescriptionUpdate = (ev) => {
         ev.preventDefault()
         this.setState({body: ev.target.value})
     }
 
     render() {
-        const {closeModal} = this.props;        
+        const {closeModal, selectedPost, isEdit} = this.props;   
+        console.log(selectedPost, '=============')
         return (
             <div>
                 <form>
                     {
-                        this.props.isEdit ? null
+                        isEdit ? 
+                        <div>
+                            <label>Author : </label>
+                            <TextField name="author" defaultValue={selectedPost.author} disabled={true}/>
+                        </div>
                         : <div>
                             <label>Author : </label>
                             <TextField name="author" onChange={this.handleAuthorUpdate} hintText="Name" />
                         </div>
                     }
                     <div>
-                        <label>Title : </label>
-                        <TextField name="title" onChange={this.handleTitleUpdate} hintText="Title" />
-                    </div>
-                    <div>
                         <label>Description : </label>
-                        <TextField name="body" onChange={this.handleDescriptionUpdate} hintText="Description" />
+                        <TextField name="body" defaultValue={isEdit ? selectedPost.body : ''} onChange={this.handleDescriptionUpdate} hintText="Description" />
                     </div>
                     <FlatButton
                         label="Submit"
@@ -114,9 +99,9 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
     return {
-        updatePost : (post) => dispatch(updatePost(post)),
-        addPost : (post) => dispatch(addPost(post)),
+        updateComment : (post) => dispatch(addComment(post)),
+        addComment : (post) => dispatch(addComment(post)),
     }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(AddPostForm)
+export default connect(mapStateToProps, mapDispatchToProps)(AddCommentForm)

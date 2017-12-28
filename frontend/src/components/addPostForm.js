@@ -11,8 +11,6 @@ import {
     updatePost
 } from '../actions/postActions';
 
-import { addCommentByPost } from '../utils/serverAPI';
-
 class AddPostForm extends Component {
     constructor(props) {
         super(props)

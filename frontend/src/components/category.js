@@ -1,13 +1,12 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { withRouter } from 'react-router-dom';
-import { Link } from 'react-router-dom';
+import { withRouter, Link } from 'react-router-dom';
 import FlatButton from 'material-ui/FlatButton';
 import Dialog from 'material-ui/Dialog';
 import TextField from 'material-ui/TextField';
 // import uuid from 'react-native-uuid';
 
-import Post from './post';
+import PostsList from './postsList';
 
 import AddPostForm from './addPostForm';
 
@@ -15,13 +14,8 @@ import { getAllCategories } from '../actions/categoryActions';
 import { getAllPosts, addPost } from '../actions/postActions';
 
 import './category.css'
-import post from './post';
 
 const style = {
-    dividerStyle : {
-        float: 'left',
-        marginTop: '25px'
-    },
     addPostBtnStyle : {
         margin: 12,
         color: '#ffffff'        
@@ -70,18 +64,18 @@ class Category extends Component {
         const {category} = this.props;
         const currentCategory = {category: category.path}
         console.log(this.state, "Stateee")
-        const modalActions = [
-            <FlatButton
-              label="Cancel"
-              primary={true}
-              onClick={this.closeModal.bind(this)}
-            />,
-            <FlatButton
-              label="Submit"
-              primary={true}
-              onClick={this.closeModal.bind(this)}
-            />,
-        ];
+        // const modalActions = [
+        //     <FlatButton
+        //       label="Cancel"
+        //       primary={true}
+        //       onClick={this.closeModal.bind(this)}
+        //     />,
+        //     <FlatButton
+        //       label="Submit"
+        //       primary={true}
+        //       onClick={this.closeModal.bind(this)}
+        //     />,
+        // ];
         console.log(this.state.modalOpen, 'Edit Post', this.state.isEdit)
         return (
             <div className="category">
@@ -104,7 +98,7 @@ class Category extends Component {
                         <AddPostForm closeModal={this.closeModal} isEdit={this.state.isEdit} selectedPost={this.state.isEdit ? this.state.selectedPost : currentCategory}/> 
                     </Dialog>
                     <div className="category-posts">
-                        <Post posts={this.props.posts} editPost={this.editPost}/>
+                        <PostsList posts={this.props.posts} editPost={this.editPost}/>
                     </div>
                 </div>
             </div>

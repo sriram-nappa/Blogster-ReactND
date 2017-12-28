@@ -1,0 +1,25 @@
+.post {
+    width:100%;
+    display: flex;
+}
+
+.post-content {
+    margin: 50px 0 50px 45px;
+    text-align: left; 
+}
+
+.post-content-header {
+    font-size: 1.5em;
+    text-transform: capitalize;
+}
+
+.post-divider {
+    width: 450px;
+    font-size: 1px;
+    color: #000000;
+    line-height: 2px;
+
+    background-color: #7a7a7a;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
