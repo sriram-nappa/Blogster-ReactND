@@ -18,6 +18,7 @@ import ThumbUp from 'material-ui/svg-icons/action/thumb-up';
 import ThumbDown from 'material-ui/svg-icons/action/thumb-down';
 import ThumbsUpdown from 'material-ui/svg-icons/action/thumbs-up-down';
 import CommentCount from 'material-ui/svg-icons/editor/mode-comment';
+import { likeComment, unlikeComment, deleteComment } from '../actions/commentActions';
 
 const style = {
     postsView : {
@@ -26,6 +27,12 @@ const style = {
         marginLeft: 20,
         marginTop: 20,
         float: 'left',
+        padding: 20
+    },
+    commentView : {
+        height: 250,
+        margin: 20,
+        marginRight: 50,
         padding: 20
     },
     postTitle : {
@@ -72,19 +79,23 @@ class PostsList extends Component {
     voteUp(e) {
         e.preventDefault()
         let postId = e.target.parentElement.getAttribute('post-id') || e.target.getAttribute('post-id')
-        this.props.likePost(postId)
+        debugger
+        let parentId = (this.props.isComment) ? this.props.posts.find((post)=>{return post.id === postId}) : null
+        (this.props.isComment) ? this.props.likeComment(parentId, postId) : this.props.likePost(postId)
     }
 
     voteDown(e) {
         e.preventDefault()
         let postId = e.target.parentElement.getAttribute('post-id') || e.target.getAttribute('post-id')
-        this.props.unlikePost(postId)
+        let parentId = (this.props.isComment) ? this.props.posts.find((post)=>{return post.id === postId}) : null
+        (this.props.isComment) ? this.props.unlikeComment(postId) : this.props.unlikePost(postId)
     }
 
     removePost(e) {
         e.preventDefault()
         let postId = e.target.parentElement.getAttribute('post-id') || e.target.getAttribute('post-id')
-        this.props.deletePost(postId)
+        let parentId = (this.props.isComment) ? this.props.posts.find((post)=>{return post.id === postId}) : null
+        (this.props.isComment) ? this.props.deleteComment(postId) : this.props.deletePost(postId)
     }
 
     convertToDate(timestamp) {
@@ -95,11 +106,11 @@ class PostsList extends Component {
 
     renderPosts() {
         var that = this
-        const {posts} = this.props
+        const {posts, view} = this.props
         console.log(posts, this.props)
         return(
             posts.map((post, i) => (
-                <Paper key={post.id} style={style.postsView} zDepth={3} rounded={true}>   
+                <Paper key={post.id} style={(view==='post') ? style.postsView : style.commentView} zDepth={3} rounded={true}>   
                     <div style={style.sectionLeft}>
                         <Badge
                             badgeContent={post.voteScore}
@@ -110,17 +121,20 @@ class PostsList extends Component {
                                 <ThumbsUpdown/>
                             </IconButton>
                         </Badge>
-                        <Badge
-                            badgeContent={post.commentCount}
-                            primary={true}
-                            badgeStyle={{top: 20, right: 20}}
-                            >
-                            <Link to={`/categories/${post.category}/posts/${post.id}`} style={{ textDecoration: 'none' }}>
-                                <IconButton tooltip='Comments'>
-                                    <CommentCount/>
-                                </IconButton>
-                            </Link>
-                        </Badge>
+                        { (view === 'post') ?
+                            <Badge
+                                badgeContent={post.commentCount}
+                                primary={true}
+                                badgeStyle={{top: 20, right: 20}}
+                                >
+                                <Link to={`/categories/${post.category}/posts/${post.id}`} style={{ textDecoration: 'none' }}>
+                                    <IconButton tooltip='Comments'>
+                                        <CommentCount/>
+                                    </IconButton>
+                                </Link>
+                            </Badge> :
+                            null
+                        }
                     </div>
                     <div style={style.sectionRight}>
                         <div style={style.postTools}>
@@ -162,7 +176,10 @@ function mapDispatchToProps(dispatch) {
     return {
         likePost : (post) => dispatch(likePost(post)),
         unlikePost : (post) => dispatch(unlikePost(post)),
-        deletePost : (post) => dispatch(deletePost(post))
+        deletePost : (post) => dispatch(deletePost(post)),
+        likeComment : (post) => dispatch(likeComment(post)),
+        unlikeComment : (post) => dispatch(unlikeComment(post)),
+        deleteComment : (post) => dispatch(deleteComment(post))
     }
 }
 

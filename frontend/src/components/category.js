@@ -98,7 +98,7 @@ class Category extends Component {
                         <AddPostForm closeModal={this.closeModal} isEdit={this.state.isEdit} selectedPost={this.state.isEdit ? this.state.selectedPost : currentCategory}/> 
                     </Dialog>
                     <div className="category-posts">
-                        <PostsList posts={this.props.posts} editPost={this.editPost}/>
+                        <PostsList posts={this.props.posts} editPost={this.editPost} view={'post'}/>
                     </div>
                 </div>
             </div>

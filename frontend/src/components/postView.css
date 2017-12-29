@@ -4,6 +4,7 @@
 }
 
 .post-content {
+    width: 100%;
     margin: 50px 0 50px 45px;
     text-align: left; 
 }
@@ -13,10 +14,23 @@
     text-transform: capitalize;
 }
 
+.post-content-sub-header {
+    display: block;
+    font-size: 1.2em;
+    text-transform: capitalize;
+    font-weight: 700;
+    margin-top: 25px;
+}
+
+.post-selected {
+    width: 100%;
+    margin: 0 auto;
+}
+
 .post-divider {
     width: 450px;
     font-size: 1px;
-    color: #000000;
+    color: #3b3939;
     line-height: 2px;
 
     background-color: #7a7a7a;

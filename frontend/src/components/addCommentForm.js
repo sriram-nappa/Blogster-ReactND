@@ -17,30 +17,29 @@ class AddCommentForm extends Component {
         this.state = {
             body: '',
             author: '',
-            title: ''
         }
         this.submitForm = this.submitForm.bind(this);
     }
     
     componentDidMount() {
         console.log(this.props)
-        const {body, author} = this.props.selectedPost ? this.props.selectedPost : '';
+        const {body, author} = this.props.selectedComment ? this.props.selectedComment : '';
         this.setState({body, author})
     }
 
     submitForm = (ev) => {
         ev.preventDefault()
-        const {id, timestamp, category} = this.props.selectedPost
+        const {id, timestamp, parentId} = this.props.selectedComment
         const post = Object.assign({}, this.state, {
-            category,
             id: id || uuid.v4(),
-            timestamp: timestamp || Date.now()
+            timestamp: timestamp || Date.now(),
+            parentId: parentId
         });
         if (!this.props.isEdit) {
             console.log(post)
-            this.props.addPost(post)
+            this.props.addComment(post)
         } else {
-            this.props.updatePost(post)
+            this.props.updateComment(post)
         }
         this.props.closeModal()
     }
@@ -56,8 +55,8 @@ class AddCommentForm extends Component {
     }
 
     render() {
-        const {closeModal, selectedPost, isEdit} = this.props;   
-        console.log(selectedPost, '=============')
+        const {closeModal, selectedComment, isEdit} = this.props;   
+        console.log(selectedComment, '=============')
         return (
             <div>
                 <form>
@@ -65,7 +64,7 @@ class AddCommentForm extends Component {
                         isEdit ? 
                         <div>
                             <label>Author : </label>
-                            <TextField name="author" defaultValue={selectedPost.author} disabled={true}/>
+                            <TextField name="author" defaultValue={selectedComment.author} disabled={true}/>
                         </div>
                         : <div>
                             <label>Author : </label>
@@ -74,7 +73,7 @@ class AddCommentForm extends Component {
                     }
                     <div>
                         <label>Description : </label>
-                        <TextField name="body" defaultValue={isEdit ? selectedPost.body : ''} onChange={this.handleDescriptionUpdate} hintText="Description" />
+                        <TextField name="body" defaultValue={isEdit ? selectedComment.body : ''} onChange={this.handleDescriptionUpdate} hintText="Description" />
                     </div>
                     <FlatButton
                         label="Submit"
