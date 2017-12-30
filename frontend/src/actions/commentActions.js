@@ -74,6 +74,7 @@ export function getCommentsSuccess(comments) {
 }
 
 export function likeComment(postId, commentId) {
+  console.log(postId, commentId)
   return (dispatch) => {
     serverAPI.voteComment(commentId, 'upVote').then(() => {
       serverAPI.getCommentsByPost(postId).then((comments) => {

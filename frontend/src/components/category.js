@@ -64,18 +64,6 @@ class Category extends Component {
         const {category} = this.props;
         const currentCategory = {category: category.path}
         console.log(this.state, "Stateee")
-        // const modalActions = [
-        //     <FlatButton
-        //       label="Cancel"
-        //       primary={true}
-        //       onClick={this.closeModal.bind(this)}
-        //     />,
-        //     <FlatButton
-        //       label="Submit"
-        //       primary={true}
-        //       onClick={this.closeModal.bind(this)}
-        //     />,
-        // ];
         console.log(this.state.modalOpen, 'Edit Post', this.state.isEdit)
         return (
             <div className="category">
@@ -91,7 +79,6 @@ class Category extends Component {
                         onClick={this.openModal.bind(this)}/>
                     <Dialog
                         title={this.state.isEdit ? "Edit Post" : "Add Post"}
-                        // actions={modalActions}
                         modal={true}
                         open={this.state.modalOpen}
                     >

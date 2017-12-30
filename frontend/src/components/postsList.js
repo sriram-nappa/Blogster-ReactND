@@ -79,23 +79,34 @@ class PostsList extends Component {
     voteUp(e) {
         e.preventDefault()
         let postId = e.target.parentElement.getAttribute('post-id') || e.target.getAttribute('post-id')
-        debugger
-        let parentId = (this.props.isComment) ? this.props.posts.find((post)=>{return post.id === postId}) : null
-        (this.props.isComment) ? this.props.likeComment(parentId, postId) : this.props.likePost(postId)
+        let currentComment = (this.props.isComment) ? this.props.posts.find((post)=>{return post.id === postId}) : null
+        if(this.props.isComment) {
+            this.props.likeComment(currentComment.parentId, currentComment.id)
+        } else {
+            this.props.likePost(postId)
+        }
     }
 
     voteDown(e) {
         e.preventDefault()
         let postId = e.target.parentElement.getAttribute('post-id') || e.target.getAttribute('post-id')
-        let parentId = (this.props.isComment) ? this.props.posts.find((post)=>{return post.id === postId}) : null
-        (this.props.isComment) ? this.props.unlikeComment(postId) : this.props.unlikePost(postId)
+        let currentComment = (this.props.isComment) ? this.props.posts.find((post)=>{return post.id === postId}) : null
+        if(this.props.isComment) {
+            this.props.unlikeComment(currentComment.parentId, currentComment.id) 
+        } else {
+            this.props.unlikePost(postId) 
+        }
     }
 
     removePost(e) {
         e.preventDefault()
         let postId = e.target.parentElement.getAttribute('post-id') || e.target.getAttribute('post-id')
-        let parentId = (this.props.isComment) ? this.props.posts.find((post)=>{return post.id === postId}) : null
-        (this.props.isComment) ? this.props.deleteComment(postId) : this.props.deletePost(postId)
+        let currentComment = (this.props.isComment) ? this.props.posts.find((post)=>{return post.id === postId}) : null
+        if(this.props.isComment) {
+            this.props.deleteComment(currentComment.id, currentComment.parentId)
+        } else {
+            this.props.deletePost(postId)
+        }
     }
 
     convertToDate(timestamp) {
@@ -177,9 +188,9 @@ function mapDispatchToProps(dispatch) {
         likePost : (post) => dispatch(likePost(post)),
         unlikePost : (post) => dispatch(unlikePost(post)),
         deletePost : (post) => dispatch(deletePost(post)),
-        likeComment : (post) => dispatch(likeComment(post)),
-        unlikeComment : (post) => dispatch(unlikeComment(post)),
-        deleteComment : (post) => dispatch(deleteComment(post))
+        likeComment : (postId,commentId) => dispatch(likeComment(postId,commentId)),
+        unlikeComment : (postId,commentId) => dispatch(unlikeComment(postId,commentId)),
+        deleteComment : (commentId,postId) => dispatch(deleteComment(commentId, postId))
     }
 }
 

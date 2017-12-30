@@ -30,16 +30,16 @@ class AddCommentForm extends Component {
     submitForm = (ev) => {
         ev.preventDefault()
         const {id, timestamp, parentId} = this.props.selectedComment
-        const post = Object.assign({}, this.state, {
+        const comment = Object.assign({}, this.state, {
             id: id || uuid.v4(),
             timestamp: timestamp || Date.now(),
             parentId: parentId
         });
+        debugger
         if (!this.props.isEdit) {
-            console.log(post)
-            this.props.addComment(post)
+            this.props.addComment(comment)
         } else {
-            this.props.updateComment(post)
+            this.props.updateComment(comment)
         }
         this.props.closeModal()
     }
