@@ -87,6 +87,7 @@ class PostView extends Component {
         const {categoryid, postid} = this.props.match.params 
         const {selectedPost, selectedComment} = this.state
         const currentCommentObj = {'parentId': postid}
+        console.log(this.props, "History")
         return(
             <div className="post">
                 <div className="post-content">
@@ -117,7 +118,7 @@ class PostView extends Component {
                         <AddCommentForm closeModal={this.closeCommentModal} isEdit={this.state.isCommentEdit} selectedComment={this.state.isCommentEdit? selectedComment : currentCommentObj}/>
                     </Dialog>
                     <div className="post-selected">
-                        <PostsList posts={this.props.post} editPost={this.editPost} view={'comment'} isComment={false}/>
+                        <PostsList posts={this.props.post} editPost={this.editPost} view={'comment'} isComment={false} history={this.props.history}/>
                     </div>
                     <span className="post-content-sub-header">
                         Comments

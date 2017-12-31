@@ -7,3 +7,28 @@
     color: #000000;
     font-size: 1.4em;
 }
+
+.category-content-header {
+    font-size: 1.7em;
+    text-transform: capitalize;
+    text-align: left;
+    margin: 50px 0 10px 30px;
+}
+
+.category-divider {
+    width: 450px;
+    font-size: 1px;
+    color: #000000;
+    line-height: 2px;
+
+    background-color: #7a7a7a;
+    margin: 50px 0 10px 30px;
+}
+
+.category-allposts {
+    display: block;
+    width: 80%;
+    text-align: left;
+    position: relative;
+    left: 10%;
+}

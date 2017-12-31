@@ -19,7 +19,6 @@ export function getAllPosts(postId = '') {
 }
 
 export function getAllPostsSuccess(posts) {
-    console.log('Posts Action', posts)
     return {
         type: GET_POSTS,
         posts

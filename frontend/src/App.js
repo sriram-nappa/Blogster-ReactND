@@ -22,13 +22,13 @@ class App extends Component {
   }
 
   render() {
-    const { allCategories } = this.props;
-
+    const { allCategories, allPosts } = this.props;
+    console.log(this.props)
     return (
       <div className="App">
         <AppBar title="Blogster" iconElementLeft={<IconButton tooltip="Home"><Link className="appLink" to="/"><ActionHome style={{'marginRight': '24'}}/></Link></IconButton>} style={{'textAlign': 'center'}}/>
         <Switch>
-          <Route exact path="/" render={() => <CategoryView categories={allCategories}/>}/>
+          <Route exact path="/" render={() => <CategoryView categories={allCategories} posts={allPosts}/>}/>
           <Route exact path="/categories/:categoryid" render={() => <Category/>}/>
           <Route exact path="/categories/:categoryid/posts/:postid" render={({match}) => <PostView matchLink={`/categories/${match.params.categoryid}/posts/${match.params.postid}`}/>}/>
           <Route component={Page404}/>
@@ -40,7 +40,8 @@ class App extends Component {
 
 function mapStateToProps(state) {
   return {
-    allCategories: state.categories.categories
+    allCategories: state.categories.categories,
+    allPosts: state.posts.posts
   }
 }
 

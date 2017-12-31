@@ -26,6 +26,7 @@ const style = {
         width: 400,
         marginLeft: 20,
         marginTop: 20,
+        marginBottom: 20,
         float: 'left',
         padding: 20
     },
@@ -106,6 +107,7 @@ class PostsList extends Component {
             this.props.deleteComment(currentComment.id, currentComment.parentId)
         } else {
             this.props.deletePost(postId)
+            this.props.history ? this.props.history.push("") : null
         }
     }
 
@@ -163,7 +165,16 @@ class PostsList extends Component {
                             </IconButton>
                         </div>
                         <span style={style.postTitle}>{post.title}</span>
-                        <div>by <span style={style.textBold}>{post.author}</span> posted in <span style={style.textBold}>{post.category}</span></div>
+                        <div>by&nbsp;
+                            <span style={style.textBold}>{post.author}</span>
+                            {(view==='post') ? 
+                            ' posted in '
+                            : '' }
+                            {(view==='post') ?
+                            <span style={style.textBold}>{post.category}</span>
+                            : '' }
+                            
+                        </div>
                         <span style={style.textItalics}>{that.convertToDate(post.timestamp)}</span>
                         <div style={style.postDesc}>{post.body}</div>
                     </div>
