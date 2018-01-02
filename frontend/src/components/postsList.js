@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 import {connect} from 'react-redux'
-import {withRouter, Link} from 'react-router-dom'
-import Modal from 'react-modal'
+import {Link} from 'react-router-dom'
 import Paper from 'material-ui/Paper';
 import Badge from 'material-ui/Badge';
 import IconButton from 'material-ui/IconButton';
@@ -107,7 +106,9 @@ class PostsList extends Component {
             this.props.deleteComment(currentComment.id, currentComment.parentId)
         } else {
             this.props.deletePost(postId)
-            this.props.history ? this.props.history.push("") : null
+            if(this.props.history){
+                this.props.history.push("")
+            }
         }
     }
 
@@ -120,7 +121,6 @@ class PostsList extends Component {
     renderPosts() {
         var that = this
         const {posts, view} = this.props
-        console.log(posts, this.props)
         return(
             posts.map((post, i) => (
                 <Paper key={post.id} style={(view==='post') ? style.postsView : style.commentView} zDepth={3} rounded={true}>   

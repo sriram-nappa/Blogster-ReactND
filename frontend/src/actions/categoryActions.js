@@ -8,7 +8,6 @@ export function getAllCategories() {
         serverAPI.getCategories().then(data => {
             dispatch(getAllCategoriesSuccess(data.categories))
         }).catch(error => {
-            console.log('error!')
             throw(error)
         })
     }

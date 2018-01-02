@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import Paper from 'material-ui/Paper';
-import Dialog from 'material-ui/Dialog';
 import DropDownMenu from 'material-ui/DropDownMenu';
 import MenuItem from 'material-ui/MenuItem';
 
@@ -25,7 +24,7 @@ class CategoryView extends Component {
             modalOpen: false,
             isEdit: true,
             selectedPost: {},
-            sortingCriteria: 'timestamp',
+            sortingCriteria: 'score',
             open: false
         }
         this.editPost = this.editPost.bind(this)
@@ -42,8 +41,7 @@ class CategoryView extends Component {
 
     sortAllPosts() {
         const sortingCriteria = this.state.sortingCriteria
-        console.log(sortingCriteria, 'sort')
-        let sortedPosts =  this.props.posts.sort((post1,post2) => {
+        const sortedPosts =  this.props.posts.sort((post1,post2) => {
             switch(sortingCriteria) {
                 case 'timestamp':
                     return post2.timestamp - post1.timestamp
@@ -53,7 +51,6 @@ class CategoryView extends Component {
                     return null
             }
         })
-        console.log('sorted', sortedPosts, this.props.posts)
         return sortedPosts
     }
 
@@ -77,13 +74,13 @@ class CategoryView extends Component {
     }
 
     render() {
-        const {categories, posts} = this.props
+        const {categories} = this.props
         const categoriesWrapper = categories.map((category, i) => (
             <Paper key={i} style={style} zDepth={3} rounded={true}>            
                 {this.renderCategories(category.path)}
             </Paper>
         ));
-        const sortedPosts = this.sortAllPosts()
+        const sortedPosts = [...this.sortAllPosts()]
         return(
             <div>
                 <div className="category-content-header">
@@ -101,11 +98,13 @@ class CategoryView extends Component {
 				  <option value="timestamp">By time</option>
 				  <option value="score">By score</option>
                 </select> */}
-                <DropDownMenu value={this.state.sortingCriteria} onChange={this.handleChange}>
-                    <MenuItem value={1} primaryText="Sort By" disabled={true}/>
-                    <MenuItem value="score" primaryText="Score" />
-                    <MenuItem value="timestamp" primaryText="Timestamp"/>
-                </DropDownMenu>
+                <div className="category-sort">
+                    <DropDownMenu value={this.state.sortingCriteria} onChange={this.handleChange}>
+                        <MenuItem value={1} primaryText="Sort By" disabled={true}/>
+                        <MenuItem value="score" primaryText="Score" />
+                        <MenuItem value="timestamp" primaryText="Timestamp"/>
+                    </DropDownMenu>
+                </div>
                 <div className="category-allposts">
                     <PostsList posts={sortedPosts} editPost={this.editPost} view={'post'}/>
                 </div>

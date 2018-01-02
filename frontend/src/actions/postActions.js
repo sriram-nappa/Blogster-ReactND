@@ -12,7 +12,6 @@ export function getAllPosts(postId = '') {
         serverAPI.getPosts(postId).then(data => {
             dispatch(getAllPostsSuccess(data))
         }).catch(error => {
-            console.log('error')
             throw(error)
         })
     }

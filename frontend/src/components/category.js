@@ -1,17 +1,15 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { withRouter, Link } from 'react-router-dom';
+import { withRouter } from 'react-router-dom';
 import FlatButton from 'material-ui/FlatButton';
 import Dialog from 'material-ui/Dialog';
-import TextField from 'material-ui/TextField';
-// import uuid from 'react-native-uuid';
 
 import PostsList from './postsList';
 
 import AddPostForm from './addPostForm';
 
 import { getAllCategories } from '../actions/categoryActions';
-import { getAllPosts, addPost } from '../actions/postActions';
+import { getAllPosts } from '../actions/postActions';
 
 import './category.css'
 
@@ -35,12 +33,10 @@ class Category extends Component {
     }
 
     openModal() {
-        console.log('Here')
         this.setState({modalOpen: true})
     }
 
     closeModal() {
-        console.log("Called", this.state)
         this.setState({modalOpen: false, isEdit: false})
     }
 
@@ -50,7 +46,6 @@ class Category extends Component {
         let filteredPost = posts.filter((post) => {
             return post.id === postId
         })
-        console.log(filteredPost, "++++++++++++")
         this.setState({isEdit: true, modalOpen:true, selectedPost:{...filteredPost[0]}})
     }
 
@@ -63,8 +58,6 @@ class Category extends Component {
     render() {
         const {category} = this.props;
         const currentCategory = {category: category.path}
-        console.log(this.state, "Stateee")
-        console.log(this.state.modalOpen, 'Edit Post', this.state.isEdit)
         return (
             <div className="category">
                 <div className="category-content">
@@ -97,7 +90,6 @@ function mapStateToProps(state, props) {
     const categoryID = props.categoryid ? props.categoryid : props.match.params.categoryid;
     const postsList = state.posts.posts ? state.posts.posts.filter(post => categoryID === post.category) : [];
     const category = state.categories.categories.find(category => categoryID === category.path) || [];
-    console.log("State", postsList)
     return {
         category: category,
         posts: postsList

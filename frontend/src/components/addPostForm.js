@@ -4,8 +4,6 @@ import TextField from 'material-ui/TextField';
 import FlatButton from 'material-ui/FlatButton';
 import uuid from 'react-native-uuid';
 
-import {Link, withRouter, Switch, Route} from 'react-router-dom';
-
 import {
     addPost,
     updatePost
@@ -23,7 +21,6 @@ class AddPostForm extends Component {
     }
     
     componentDidMount() {
-        console.log(this.props)
         const {body, author, title} = this.props.selectedPost ? this.props.selectedPost : '';
         this.setState({body, author, title})
     }
@@ -37,7 +34,6 @@ class AddPostForm extends Component {
             timestamp: timestamp || Date.now()
         });
         if (!this.props.isEdit) {
-            console.log(post)
             this.props.addPost(post)
         } else {
             this.props.updatePost(post)
@@ -62,7 +58,6 @@ class AddPostForm extends Component {
 
     render() {
         const {closeModal, selectedPost, isEdit} = this.props;   
-        console.log(selectedPost, '=============')
         return (
             <div>
                 <form>
@@ -102,7 +97,6 @@ class AddPostForm extends Component {
 }
 
 function mapStateToProps(state) {
-    console.log(state)
     return {}
 }
 

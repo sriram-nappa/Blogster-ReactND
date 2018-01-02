@@ -18,7 +18,6 @@ let middleware = applyMiddleware(thunk);
 if(debug) {
     middleware = compose(applyMiddleware(thunk), window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__());
 }
-console.log(typeof rootReducer)
 const store = createStore(
     rootReducer,
     middleware

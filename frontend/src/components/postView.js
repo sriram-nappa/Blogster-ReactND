@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
-import Paper from 'material-ui/Paper';
 import { connect } from 'react-redux';
-import { withRouter, Link } from 'react-router-dom';
+import { withRouter } from 'react-router-dom';
 
 import Dialog from 'material-ui/Dialog';
 import FlatButton from 'material-ui/FlatButton';
@@ -50,28 +49,23 @@ class PostView extends Component {
     }
 
     openPostModal() {
-        console.log('Here')
         this.setState({postModalOpen: true})
     }
 
     closePostModal() {
-        console.log("Called", this.state)
         this.setState({postModalOpen: false, isPostEdit: false})
     }
 
     editPost(e) {
-        let postId = e.target.parentElement.getAttribute('post-id') || e.target.getAttribute('post-id')
         const {post} = this.props
         this.setState({isPostEdit: true, postModalOpen:true, selectedPost:{...post[0]}})
     }
 
     openCommentModal() {
-        console.log('Here')
         this.setState({commentModalOpen: true})
     }
 
     closeCommentModal() {
-        console.log("Called", this.state)
         this.setState({commentModalOpen: false, isCommentEdit: false})
     }
 
@@ -83,11 +77,9 @@ class PostView extends Component {
     }
 
     render() {
-        console.log(this.props)
         const {categoryid, postid} = this.props.match.params 
         const {selectedPost, selectedComment} = this.state
         const currentCommentObj = {'parentId': postid}
-        console.log(this.props, "History")
         return(
             <div className="post">
                 <div className="post-content">
@@ -136,8 +128,6 @@ function mapStateToProps(state, props) {
     const postId = props.match.params.postid || props.postid
     const post = state.posts.posts.filter((post)=>{ return postId === post.id}) || {}
     const comments = state.comments.comments.filter(comment => postId === comment.parentId)
-
-    console.log(state, props)
     return {
         post: post,
         comments: comments,

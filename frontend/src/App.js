@@ -23,7 +23,6 @@ class App extends Component {
 
   render() {
     const { allCategories, allPosts } = this.props;
-    console.log(this.props)
     return (
       <div className="App">
         <AppBar title="Blogster" iconElementLeft={<IconButton tooltip="Home"><Link className="appLink" to="/"><ActionHome style={{'marginRight': '24'}}/></Link></IconButton>} style={{'textAlign': 'center'}}/>

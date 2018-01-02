@@ -25,6 +25,12 @@
     margin: 50px 0 10px 30px;
 }
 
+.category-sort {
+    display: block;
+    text-align: right;
+    margin-right: 50px;
+}
+
 .category-allposts {
     display: block;
     width: 80%;

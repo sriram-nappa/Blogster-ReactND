@@ -4,8 +4,6 @@ import TextField from 'material-ui/TextField';
 import FlatButton from 'material-ui/FlatButton';
 import uuid from 'react-native-uuid';
 
-import {Link, withRouter, Switch, Route} from 'react-router-dom';
-
 import {
     addComment,
     updateComment
@@ -22,7 +20,6 @@ class AddCommentForm extends Component {
     }
     
     componentDidMount() {
-        console.log(this.props)
         const {body, author} = this.props.selectedComment ? this.props.selectedComment : '';
         this.setState({body, author})
     }
@@ -35,7 +32,6 @@ class AddCommentForm extends Component {
             timestamp: timestamp || Date.now(),
             parentId: parentId
         });
-        debugger
         if (!this.props.isEdit) {
             this.props.addComment(comment)
         } else {
@@ -56,7 +52,6 @@ class AddCommentForm extends Component {
 
     render() {
         const {closeModal, selectedComment, isEdit} = this.props;   
-        console.log(selectedComment, '=============')
         return (
             <div>
                 <form>
@@ -92,13 +87,12 @@ class AddCommentForm extends Component {
 }
 
 function mapStateToProps(state) {
-    console.log(state)
     return {}
 }
 
 function mapDispatchToProps(dispatch) {
     return {
-        updateComment : (post) => dispatch(addComment(post)),
+        updateComment : (post) => dispatch(updateComment(post)),
         addComment : (post) => dispatch(addComment(post)),
     }
 }
