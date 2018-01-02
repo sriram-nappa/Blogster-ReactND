@@ -6,6 +6,7 @@ This is my version of *Readable* project for Udacity React Nano degree.
 * [Prerequisites](#prerequisites)
 * [Installing](#installing)
 * [Built With](#built-with)
+* [Demo Video](#demo)
 * [Authors](#authors)
 * [Acknowledgments](#acknowledgments)
 
@@ -67,6 +68,10 @@ The project uses the following dependencies:
 * Material-UI
 * moment
 * UUID
+
+## Demo Video
+
+[![Watch Demo](https://www.useloom.com/share/d48d24dec7264b84bafadee5ad457c98)](https://www.useloom.com/share/d48d24dec7264b84bafadee5ad457c98)
 
 ## Authors
 
