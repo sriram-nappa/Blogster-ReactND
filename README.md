@@ -27,7 +27,7 @@ First of all, download or clone this repository.
 Then, go to project folder using:
 
 ```
-> cd readable
+> cd Blogster-ReactND
 ```
 
 To install and run server
