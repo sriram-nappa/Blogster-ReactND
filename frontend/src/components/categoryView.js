@@ -3,8 +3,11 @@ import { Link } from 'react-router-dom';
 import Paper from 'material-ui/Paper';
 import DropDownMenu from 'material-ui/DropDownMenu';
 import MenuItem from 'material-ui/MenuItem';
+import Dialog from 'material-ui/Dialog';
 
+import AddPostForm from './addPostForm';
 import PostsList from './postsList';
+
 import './categoryView.css';
 
 const style = {
@@ -28,6 +31,7 @@ class CategoryView extends Component {
             open: false
         }
         this.editPost = this.editPost.bind(this)
+        this.closeModal = this.closeModal.bind(this)
         this.handleChange = this.handleChange.bind(this)
     }
 
@@ -54,9 +58,18 @@ class CategoryView extends Component {
         return sortedPosts
     }
 
+    openModal() {
+        this.setState({modalOpen: true})
+    }
+
+    closeModal() {
+        this.setState({modalOpen: false, isEdit: false})
+    }
+
     editPost(e) {
         let postId = e.target.parentElement.getAttribute('post-id') || e.target.getAttribute('post-id')
         const {posts} = this.props
+        console.log('edit')
         let filteredPost = posts.filter((post) => {
             return post.id === postId
         })
@@ -75,6 +88,8 @@ class CategoryView extends Component {
 
     render() {
         const {categories} = this.props
+        const {selectedPost} = this.state
+        const currentCategory = {}
         const categoriesWrapper = categories.map((category, i) => (
             <Paper key={i} style={style} zDepth={3} rounded={true}>            
                 {this.renderCategories(category.path)}
@@ -94,10 +109,6 @@ class CategoryView extends Component {
                         Posts
                 </div>
                 <div className="category-divider">.</div>
-                {/* <select value={this.state.sortingCriteria} onChange={(ev) => this.onChange(ev)} ref="sortingSelector">
-				  <option value="timestamp">By time</option>
-				  <option value="score">By score</option>
-                </select> */}
                 <div className="category-sort">
                     <DropDownMenu value={this.state.sortingCriteria} onChange={this.handleChange}>
                         <MenuItem value={1} primaryText="Sort By" disabled={true}/>
@@ -106,8 +117,15 @@ class CategoryView extends Component {
                     </DropDownMenu>
                 </div>
                 <div className="category-allposts">
-                    <PostsList posts={sortedPosts} editPost={this.editPost} view={'post'}/>
+                    <PostsList posts={sortedPosts} editPost={this.editPost} view={'post'} selectedPost={selectedPost}/>
                 </div>
+                <Dialog
+                        title={this.state.isEdit ? "Edit Post" : "Add Post"}
+                        modal={true}
+                        open={this.state.modalOpen}
+                    >
+                        <AddPostForm closeModal={this.closeModal} isEdit={this.state.isEdit} selectedPost={this.state.isEdit ? this.state.selectedPost : currentCategory}/> 
+                </Dialog>
             </div>
         );    
     }
