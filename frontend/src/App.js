@@ -7,7 +7,7 @@ import { getAllCategories } from './actions/categoryActions'
 
 import Category from './components/category';
 import PostView from './components/postView';
-import Page404 from './components/errorPage';
+import ErrorPage from './components/errorPage';
 import { getAllPosts } from './actions/postActions';
 
 import IconButton from 'material-ui/IconButton';
@@ -30,7 +30,7 @@ class App extends Component {
           <Route exact path="/" render={() => <CategoryView categories={allCategories} posts={allPosts}/>}/>
           <Route exact path="/categories/:categoryid" render={() => <Category/>}/>
           <Route exact path="/categories/:categoryid/posts/:postid" render={({match}) => <PostView matchLink={`/categories/${match.params.categoryid}/posts/${match.params.postid}`}/>}/>
-          <Route component={Page404}/>
+          <Route component={ErrorPage}/>
         </Switch>
       </div>
     );

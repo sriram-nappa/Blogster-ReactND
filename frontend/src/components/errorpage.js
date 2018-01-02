@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
+import { withRouter } from 'react-router-dom'
 
-class Page404 extends Component {
+class ErrorPage extends Component {
 
   render() {
     return (
@@ -12,4 +13,4 @@ class Page404 extends Component {
 
 }
 
-export default Page404;
+export default withRouter(ErrorPage);
