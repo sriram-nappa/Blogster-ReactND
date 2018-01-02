@@ -69,7 +69,6 @@ class CategoryView extends Component {
     editPost(e) {
         let postId = e.target.parentElement.getAttribute('post-id') || e.target.getAttribute('post-id')
         const {posts} = this.props
-        console.log('edit')
         let filteredPost = posts.filter((post) => {
             return post.id === postId
         })
