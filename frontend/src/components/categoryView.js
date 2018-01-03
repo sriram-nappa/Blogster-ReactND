@@ -116,7 +116,11 @@ class CategoryView extends Component {
                     </DropDownMenu>
                 </div>
                 <div className="category-allposts">
-                    <PostsList posts={sortedPosts} editPost={this.editPost} view={'post'} selectedPost={selectedPost}/>
+                    {
+                        (this.props.posts && Object.keys(this.props.posts).length!==0) ? 
+                            <PostsList posts={sortedPosts} editPost={this.editPost} view={'post'} selectedPost={selectedPost}/> 
+                            : "No posts found"
+                    }
                 </div>
                 <Dialog
                         title={this.state.isEdit ? "Edit Post" : "Add Post"}
