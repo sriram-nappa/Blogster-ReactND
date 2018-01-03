@@ -8,6 +8,7 @@ import FlatButton from 'material-ui/FlatButton';
 import AddPostForm from './addPostForm'
 import AddCommentForm from './addCommentForm';
 import PostsList from './postsList';
+import ErrorPage from './errorPage';
 
 import { getCommentsByPost } from '../actions/commentActions';
 import { 
@@ -80,47 +81,53 @@ class PostView extends Component {
         const {categoryid, postid} = this.props.match.params 
         const {selectedPost, selectedComment} = this.state
         const currentCommentObj = {'parentId': postid}
-        return(
-            <div className="post">
-                <div className="post-content">
-                    <span className="post-content-header">
-                        {categoryid}
-                    </span>
-                    <div className="post-divider">.</div>
-                    <FlatButton backgroundColor="#0a4797"
-                        hoverColor="#0d3a75"
-                        label="Add Comment"
-                        style={style.addCommentBtnStyle}
-                        onClick={this.openCommentModal.bind(this)}/>
-                    <span className="post-content-sub-header">
-                        Post
-                    </span>
-                    <Dialog
-                        title={this.state.isPostEdit ? "Edit Post" : "Add Post"}
-                        modal={true}
-                        open={this.state.postModalOpen}
-                    >
-                        <AddPostForm closeModal={this.closePostModal} isEdit={this.state.isPostEdit} selectedPost={selectedPost}/>                         
-                    </Dialog>
-                    <Dialog
-                        title={this.state.isCommentEdit ? "Edit Comment" : "Add Comment"}
-                        modal={true}
-                        open={this.state.commentModalOpen}
-                    >
-                        <AddCommentForm closeModal={this.closeCommentModal} isEdit={this.state.isCommentEdit} selectedComment={this.state.isCommentEdit? selectedComment : currentCommentObj}/>
-                    </Dialog>
-                    <div className="post-selected">
-                        <PostsList posts={this.props.post} editPost={this.editPost} view={'comment'} isComment={false} history={this.props.history}/>
-                    </div>
-                    <span className="post-content-sub-header">
-                        Comments
-                    </span>
-                    <div className="post-comments">
-                        <PostsList posts={this.props.comments} editPost={this.editComment} view={'comment'} isComment={true}/>
+        if(this.props.posts && Object.keys(this.props.posts).length !== 0) {
+            return(
+                <div className="post">
+                    <div className="post-content">
+                        <span className="post-content-header">
+                            {categoryid}
+                        </span>
+                        <div className="post-divider">.</div>
+                        <FlatButton backgroundColor="#0a4797"
+                            hoverColor="#0d3a75"
+                            label="Add Comment"
+                            style={style.addCommentBtnStyle}
+                            onClick={this.openCommentModal.bind(this)}/>
+                        <span className="post-content-sub-header">
+                            Post
+                        </span>
+                        <Dialog
+                            title={this.state.isPostEdit ? "Edit Post" : "Add Post"}
+                            modal={true}
+                            open={this.state.postModalOpen}
+                        >
+                            <AddPostForm closeModal={this.closePostModal} isEdit={this.state.isPostEdit} selectedPost={selectedPost}/>                         
+                        </Dialog>
+                        <Dialog
+                            title={this.state.isCommentEdit ? "Edit Comment" : "Add Comment"}
+                            modal={true}
+                            open={this.state.commentModalOpen}
+                        >
+                            <AddCommentForm closeModal={this.closeCommentModal} isEdit={this.state.isCommentEdit} selectedComment={this.state.isCommentEdit? selectedComment : currentCommentObj}/>
+                        </Dialog>
+                        <div className="post-selected">
+                            <PostsList posts={this.props.post} editPost={this.editPost} view={'comment'} isComment={false} history={this.props.history}/>
+                        </div>
+                        <span className="post-content-sub-header">
+                            Comments
+                        </span>
+                        <div className="post-comments">
+                            <PostsList posts={this.props.comments} editPost={this.editComment} view={'comment'} isComment={true}/>
+                        </div>
                     </div>
                 </div>
-            </div>
-        );
+            )
+        } else {
+            return (
+                <ErrorPage/>
+            )
+        }
     }
 }
 
